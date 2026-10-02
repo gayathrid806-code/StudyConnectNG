@@ -586,6 +586,16 @@ def create_app() -> Flask:
     def uploaded_file(filename):
         return send_from_directory(UPLOAD_ROOT, filename)
 
+    @app.get("/api/stats")
+    def stats():
+        total = User.query.count()
+        demo = User.query.filter(User.email.like("%@studyconnect.edu")).count()
+        return jsonify({
+            "registered": total,
+            "demoAccounts": demo,
+            "realStudents": max(total - demo, 0),
+        })
+
     @app.get("/")
     def home():
         return send_from_directory(ROOT, "index.html")
