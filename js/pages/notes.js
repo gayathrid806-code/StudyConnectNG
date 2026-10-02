@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
   uploadFile?.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file || !selectedSubject || !selectedTopic) return;
-    if (file.size > 100 * 1024 * 1024) {
-      StudyConnect.toast('File is too large. Use a PDF under 100 MB.');
+    if (file.size > 15 * 1024 * 1024) {
+      StudyConnect.toast('On phone, use a PDF under 15 MB.');
       e.target.value = '';
       return;
     }

@@ -3,7 +3,7 @@
  * Works when the site is served by `npm start` (same origin).
  */
 const API = {
-  base: location.protocol === 'file:' ? 'http://localhost:5000' : '',
+  base: location.protocol === 'file:' ? 'http://127.0.0.1:5000' : location.origin,
 
   token() {
     return localStorage.getItem('sc-token');
@@ -40,7 +40,7 @@ const API = {
     try {
       res = await fetch(this.base + path, { ...options, headers });
     } catch {
-      throw new Error('Cannot reach the server. Run python backend/app.py and open http://localhost:5000');
+      throw new Error('Upload or request failed. Try a smaller file, wait a few seconds, then try again.');
     }
 
     const data = await res.json().catch(() => ({}));

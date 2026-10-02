@@ -4,4 +4,4 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -w 1 -b 0.0.0.0:$PORT backend.app:application
+    startCommand: gunicorn -w 1 -t 120 -b 0.0.0.0:$PORT backend.app:application

@@ -499,6 +499,8 @@ def create_app() -> Flask:
             url = save_upload(request.files.get("file"), "notes")
         except ValueError as err:
             return jsonify({"error": str(err)}), 400
+        except OSError:
+            return jsonify({"error": "Could not save the file. Try a smaller PDF."}), 500
         if not url:
             return jsonify({"error": "Please choose a PDF or file"}), 400
         course = request.form.get("course")
