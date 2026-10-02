@@ -3,3 +3,4 @@ Flask-cors>=4.0
 Flask-sqlalchemy>=3.1
 PyJWT>=2.8
 Werkzeug>=3.0
+gunicorn>=21.2
