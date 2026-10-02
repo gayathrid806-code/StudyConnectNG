@@ -51,8 +51,14 @@ from models import (  # noqa: E402
 )
 
 JWT_SECRET = os.environ.get("JWT_SECRET", "studyconnect-dev-secret-change-me")
-UPLOAD_ROOT = BACKEND / "uploads"
-DATA_DIR = BACKEND / "data"
+# On Render, set PERSIST_DIR=/data and attach a disk at /data so notes survive restarts.
+_persist = os.environ.get("PERSIST_DIR")
+if _persist:
+    DATA_DIR = Path(_persist) / "data"
+    UPLOAD_ROOT = Path(_persist) / "uploads"
+else:
+    DATA_DIR = BACKEND / "data"
+    UPLOAD_ROOT = BACKEND / "uploads"
 ALLOWED_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".txt", ".doc", ".docx", ".ppt", ".pptx", ".zip", ".mp3", ".wav", ".webm"}
 
 AI_FALLBACK = {

@@ -2,6 +2,13 @@ services:
   - type: web
     name: studyconnectng
     runtime: python
-    plan: free
+    plan: starter
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -w 1 -t 120 -b 0.0.0.0:$PORT backend.app:application
+    envVars:
+      - key: PERSIST_DIR
+        value: /data
+    disk:
+      name: studyconnect-data
+      mountPath: /data
+      sizeGB: 1
