@@ -588,12 +588,25 @@ def create_app() -> Flask:
 
     @app.get("/api/stats")
     def stats():
-        total = User.query.count()
-        demo = User.query.filter(User.email.like("%@studyconnect.edu")).count()
+        users = User.query.order_by(User.email).all()
+        demo = sum(1 for u in users if (u.email or "").endswith("@studyconnect.edu"))
         return jsonify({
-            "registered": total,
+            "registered": len(users),
             "demoAccounts": demo,
-            "realStudents": max(total - demo, 0),
+            "realStudents": max(len(users) - demo, 0),
+            "users": [
+                {
+                    "username": u.username,
+                    "email": u.email,
+                    "fullName": u.full_name,
+                    "college": u.college or "",
+                    "course": u.course or "",
+                    "branch": u.branch or "",
+                    "year": u.year or "",
+                    "kind": "demo" if (u.email or "").endswith("@studyconnect.edu") else "student",
+                }
+                for u in users
+            ],
         })
 
     @app.get("/")

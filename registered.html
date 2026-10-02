@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registered students — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .reg-wrap { max-width: 960px; margin: 40px auto; padding: 0 20px; }
+    .reg-wrap h1 { margin: 0 0 8px; }
+    .reg-wrap p { color: var(--text-muted, #64748b); margin: 0 0 20px; }
+    .reg-table { width: 100%; border-collapse: collapse; background: #fff; }
+    .reg-table th, .reg-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+    .reg-table th { background: #f8fafc; }
+    .tag-demo { color: #64748b; }
+    .tag-student { color: #16a34a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="reg-wrap">
+    <h1>Registered students</h1>
+    <p id="summary">Loading…</p>
+    <table class="reg-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Name</th>
+          <th>College</th>
+          <th>Course</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <script>
+    fetch('/api/stats').then(function (r) { return r.json(); }).then(function (data) {
+      document.getElementById('summary').textContent =
+        data.realStudents + ' real students · ' + data.demoAccounts + ' demo accounts · ' + data.registered + ' total';
+      document.getElementById('rows').innerHTML = (data.users || []).map(function (u, i) {
+        return '<tr>' +
+          '<td>' + (i + 1) + '</td>' +
+          '<td class="' + (u.kind === 'demo' ? 'tag-demo' : 'tag-student') + '">' + (u.kind === 'demo' ? 'Demo' : 'Student') + '</td>' +
+          '<td>' + u.username + '</td>' +
+          '<td>' + u.email + '</td>' +
+          '<td>' + u.fullName + '</td>' +
+          '<td>' + u.college + '</td>' +
+          '<td>' + (u.course + ' ' + u.branch).trim() + '</td>' +
+          '</tr>';
+      }).join('');
+    }).catch(function () {
+      document.getElementById('summary').textContent = 'Could not load the list. Open this page from the live app link, not from GitHub.';
+    });
+  </script>
+</body>
+</html>
