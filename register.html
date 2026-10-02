@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="auth-layout">
+    <div class="auth-panel">
+      <div class="auth-card">
+        <div class="auth-header">
+          <a href="index.html" class="auth-logo"><span id="logoIcon"></span> StudyConnectNG</a>
+          <h1>Create Account</h1>
+          <p>Join thousands of students learning together</p>
+        </div>
+
+        <form data-validate data-auth="register">
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name</label>
+            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Your full name" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@college.edu" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-input" placeholder="Create a strong password" required minlength="6">
+            <span class="form-hint">Minimum 6 characters</span>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm your password" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="college">College Name</label>
+            <input type="text" id="college" name="college" class="form-input" placeholder="Your college or institution" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="auth-form-actions">
+            <button type="submit" class="btn btn-primary">Create Account</button>
+          </div>
+        </form>
+
+        <div class="divider">or continue with</div>
+
+        <button class="btn btn-google" type="button" id="googleRegister">
+          <span id="googleIcon"></span> Continue with Google
+        </button>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Log in</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-visual">
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-content">
+        <h2>Your Academic Community Awaits</h2>
+        <p>Sign up in seconds and connect with students who share your course, branch, and academic goals.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('logoIcon').innerHTML = Icons.logo;
+    document.getElementById('googleIcon').innerHTML = Icons.google;
+    document.getElementById('googleRegister').addEventListener('click', () => {
+      StudyConnect.toast('Google signup is not enabled. Create an account with email.');
+    });
+  </script>
+</body>
+</html>

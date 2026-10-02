@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="AI Assistant"></div>
+      <main class="app-content">
+        <div class="ai-container">
+          <div class="ai-chat-card">
+            <div class="ai-messages" id="aiMessages">
+              <div class="ai-welcome" id="aiWelcome">
+                <div class="ai-welcome-icon" id="aiWelcomeIcon"></div>
+                <h3>StudyConnectNG AI</h3>
+                <p>Ask an academic question when peers are unavailable. Explanations stay focused on Diploma and B.Tech topics.</p>
+                <div class="ai-suggestions">
+                  <button type="button" class="ai-suggestion">Explain pointers in C</button>
+                  <button type="button" class="ai-suggestion">Explain Java OOP</button>
+                  <button type="button" class="ai-suggestion">Explain DBMS normalization</button>
+                </div>
+              </div>
+            </div>
+            <div class="ai-input-area">
+              <input type="text" id="aiInput" placeholder="Ask your academic question..." autocomplete="off">
+              <button type="button" class="btn btn-primary" id="aiSend">Send</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/ai-assistant.js"></script>
+  <script>
+    document.getElementById('aiWelcomeIcon').innerHTML = Icons.bot;
+  </script>
+</body>
+</html>

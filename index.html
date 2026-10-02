@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StudyConnectNG — Connect with students, ask doubts, share knowledge, and learn together.">
+  <title>StudyConnectNG — Learn Together, Grow Together</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <span id="logoIcon"></span> StudyConnectNG
+      </a>
+      <div class="navbar-links">
+        <a href="#features">Features</a>
+        <a href="#subjects">Subjects</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="navbar-actions">
+        <a href="login.html" class="btn btn-ghost btn-sm">Log In</a>
+        <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+      </div>
+      <button class="navbar-mobile-toggle" id="navbarMobileToggle" aria-label="Menu">
+        <span id="menuIcon"></span>
+      </button>
+    </div>
+    <div class="navbar-mobile-menu" id="navbarMobileMenu">
+      <a href="#features">Features</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="login.html">Log In</a>
+      <a href="register.html">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Trusted by 10,000+ students
+          </div>
+          <h1>Connect. Learn. <span>Succeed</span> Together.</h1>
+          <p class="hero-description">
+            StudyConnectNG helps Diploma and B.Tech students connect with peers from the same course, branch, and year — ask doubts, chat, share notes, and get AI-powered help when you need it.
+          </p>
+          <div class="hero-actions">
+            <a href="register.html" class="btn btn-primary btn-lg">Get Started — It's Free</a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg">See How It Works</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-value">10K+</div>
+              <div class="hero-stat-label">Active Students</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">50K+</div>
+              <div class="hero-stat-label">Doubts Resolved</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">200+</div>
+              <div class="hero-stat-label">Colleges</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-illustration" id="heroIllustration"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Features</span>
+        <h2>Everything You Need to Excel</h2>
+        <p>A complete platform designed for student collaboration and academic success.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" id="icon1"></div>
+          <h3>Peer Learning</h3>
+          <p>Connect with students from your course, branch, and year. Ask doubts and get answers from peers who understand your curriculum.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" id="icon2"></div>
+          <h3>Real-time Chat</h3>
+          <p>Message classmates instantly with text, files, images, and voice messages. Stay connected with typing indicators and online status.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" id="icon3"></div>
+          <h3>AI Assistant</h3>
+          <p>When no peer can help, ask our AI assistant. Get instant explanations for academic concepts across all subjects.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" id="icon4"></div>
+          <h3>Notes Library</h3>
+          <p>Access and share study notes organized by course, branch, semester, and subject. Download or upload notes easily.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" id="icon5"></div>
+          <h3>Privacy First</h3>
+          <p>Your personal info stays private. Anonymous usernames, hidden phone numbers, and customizable privacy settings protect you.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" id="icon6"></div>
+          <h3>Voice Calls</h3>
+          <p>Discuss complex topics face-to-face with built-in voice calling. Perfect for group study sessions and doubt clearing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subjects Index -->
+  <section class="subjects-index" id="subjects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Curriculum</span>
+        <h2>Subjects We Cover</h2>
+        <p>Browse notes and ask doubts across Diploma and B.Tech programs — organized by course, branch, semester, and subject.</p>
+      </div>
+      <div class="subjects-index-grid" id="subjectsIndexGrid"></div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">How It Works</span>
+        <h2>Get Started in 4 Simple Steps</h2>
+        <p>Join thousands of students already learning together on StudyConnectNG.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Create Account</h3>
+            <p>Sign up with your email or Google account. Set up your academic profile in minutes.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Find Peers</h3>
+            <p>Search and connect with students from your course, branch, year, and college.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Ask & Answer</h3>
+            <p>Post academic doubts, answer questions from peers, and earn recognition for helpful answers.</p>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Learn & Grow</h3>
+            <p>Share notes, chat with classmates, use AI assistance, and ace your exams together.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Testimonials</span>
+        <h2>What Students Say</h2>
+        <p>Real feedback from students using StudyConnectNG every day.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-stars" id="stars1"></div>
+          <p class="testimonial-text">"StudyConnectNG helped me find study partners in my branch. I cleared 3 backlogs by discussing doubts with seniors!"</p>
+          <div class="testimonial-author">
+            <div class="avatar avatar-md">R</div>
+            <div class="testimonial-author-info">
+              <h4>Rahul K.</h4>
+              <p>CSE, 3rd Year — ABC Polytechnic</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars" id="stars2"></div>
+          <p class="testimonial-text">"The AI assistant is a lifesaver during late-night study sessions. And the notes library saved me before exams!"</p>
+          <div class="testimonial-author">
+            <div class="avatar avatar-md">P</div>
+            <div class="testimonial-author-info">
+              <h4>Priya S.</h4>
+              <p>ECE, 2nd Year — XYZ Engineering</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars" id="stars3"></div>
+          <p class="testimonial-text">"I love the privacy features. I can help others without sharing my personal details. Best platform for students!"</p>
+          <div class="testimonial-author">
+            <div class="avatar avatar-md">A</div>
+            <div class="testimonial-author-info">
+              <h4>Arjun M.</h4>
+              <p>IT, 1st Year — Tech University</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">FAQ</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>Got questions? We've got answers.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Is StudyConnectNG free to use?<span id="faqIcon1"></span></button>
+          <div class="faq-answer"><p>Yes! StudyConnectNG is completely free for all Diploma and B.Tech students. Create an account and start connecting with peers immediately.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How is my privacy protected?<span id="faqIcon2"></span></button>
+          <div class="faq-answer"><p>We use anonymous usernames by default. Phone numbers are never displayed. You can hide your name, email, college, and online status in privacy settings.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Can I use StudyConnectNG on mobile?<span id="faqIcon3"></span></button>
+          <div class="faq-answer"><p>Absolutely! StudyConnectNG is fully responsive and works beautifully on phones, tablets, and desktops. Access it from any browser.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">How does the AI assistant work?<span id="faqIcon4"></span></button>
+          <div class="faq-answer"><p>When no student can answer your doubt, you can ask our AI assistant. It provides explanations for academic concepts across programming, engineering, and more.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Which courses are supported?<span id="faqIcon5"></span></button>
+          <div class="faq-answer"><p>StudyConnectNG supports Diploma and B.Tech programs across all major branches including CSE, ECE, EEE, Mechanical, Civil, IT, AI & ML, and Data Science.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Ready to Connect with Your Peers?</h2>
+        <p>Join StudyConnectNG today and start learning together with thousands of students across India.</p>
+        <a href="register.html" class="btn btn-primary btn-lg">Get Started — It's Free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-logo"><span id="footerLogo"></span> StudyConnectNG</div>
+          <p>Empowering students to learn together, share knowledge, and achieve academic excellence through peer collaboration.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="register.html">Sign Up</a>
+          <a href="login.html">Log In</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="notes.html">Notes Library</a>
+          <a href="doubt.html">Ask Doubt</a>
+          <a href="ai-assistant.html">AI Assistant</a>
+          <a href="#faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 StudyConnectNG. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter"><span id="socialIcon1"></span></a>
+          <a href="#" aria-label="Instagram"><span id="socialIcon2"></span></a>
+          <a href="#" aria-label="LinkedIn"><span id="socialIcon3"></span></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script>
+    // Inject icons
+    document.getElementById('logoIcon').innerHTML = Icons.logo;
+    document.getElementById('menuIcon').innerHTML = Icons.menu;
+    document.getElementById('heroIllustration').innerHTML = Icons.heroIllustration;
+    document.getElementById('icon1').innerHTML = Icons.users;
+    document.getElementById('icon2').innerHTML = Icons.message;
+    document.getElementById('icon3').innerHTML = Icons.bot;
+    document.getElementById('icon4').innerHTML = Icons.book;
+    document.getElementById('icon5').innerHTML = Icons.shield;
+    document.getElementById('icon6').innerHTML = Icons.phone;
+    document.getElementById('footerLogo').innerHTML = Icons.logo;
+    ['stars1','stars2','stars3'].forEach(id => {
+      document.getElementById(id).innerHTML = Array(5).fill(Icons.star).join('');
+    });
+    ['faqIcon1','faqIcon2','faqIcon3','faqIcon4','faqIcon5'].forEach(id => {
+      document.getElementById(id).innerHTML = Icons.chevronDown;
+    });
+  </script>
+  <script src="js/pages/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ask Doubt — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Ask Doubt"></div>
+      <main class="app-content">
+        <div class="doubt-form-card">
+          <h2 style="font-size:var(--font-size-xl);margin-bottom:var(--space-2)">Post a doubt</h2>
+          <p style="margin-bottom:var(--space-6)">Share a question with students in your course. If nobody answers, try the AI assistant.</p>
+          <form id="doubtForm">
+            <div class="doubt-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" class="form-input" placeholder="e.g. Data Structures" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="topic">Topic</label>
+                <input type="text" id="topic" name="topic" class="form-input" placeholder="e.g. Linked Lists" required>
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label" for="question">Question</label>
+                <textarea id="question" name="question" class="form-textarea" placeholder="Describe your doubt clearly..." required></textarea>
+              </div>
+            </div>
+            <div class="upload-row">
+              <label class="file-upload">
+                <span class="file-upload-icon" id="imgUpIcon"></span>
+                <span class="file-upload-text">Upload image</span>
+                <input type="file" name="image" accept="image/*">
+              </label>
+              <label class="file-upload">
+                <span class="file-upload-icon" id="pdfUpIcon"></span>
+                <span class="file-upload-text">Upload PDF</span>
+                <input type="file" name="pdf" accept="application/pdf">
+              </label>
+            </div>
+            <div style="margin-top:var(--space-6);display:flex;gap:var(--space-3);flex-wrap:wrap">
+              <button type="submit" class="btn btn-primary">Post Doubt</button>
+              <a href="ai-assistant.html" class="btn btn-secondary">Ask AI instead</a>
+            </div>
+          </form>
+        </div>
+
+        <div class="section-title">
+          <h2>Latest Doubts</h2>
+          <span class="badge badge-primary">Accepted answers first</span>
+        </div>
+        <div id="doubtsList"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/doubt.js"></script>
+  <script>
+    document.getElementById('imgUpIcon').innerHTML = Icons.image;
+    document.getElementById('pdfUpIcon').innerHTML = Icons.file;
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Profile"></div>
+      <main class="app-content">
+        <header class="profile-header">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar" id="profileAvatar">SC</div>
+            <label class="profile-avatar-edit" aria-label="Change photo">
+              <span id="cameraIcon"></span>
+              <input type="file" id="avatarInput" accept="image/*" hidden>
+            </label>
+          </div>
+          <h2 class="profile-username" id="profileUsername">Student_4821</h2>
+          <p class="profile-meta" id="profileMeta">CSE · 2nd Year</p>
+          <div class="profile-badges">
+            <span class="badge badge-primary" id="badgeCourse">B.Tech</span>
+            <span class="badge badge-accent" id="badgeBranch">CSE</span>
+            <span class="badge badge-gray" id="badgeYear">2nd Year</span>
+          </div>
+        </header>
+
+        <div class="profile-grid">
+          <section class="profile-section">
+            <h3 class="profile-section-title">Academic details</h3>
+            <form class="profile-edit-form" id="profileForm">
+              <div class="form-group">
+                <label class="form-label" for="editUsername">Anonymous username</label>
+                <input class="form-input" id="editUsername" value="Student_4821">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editCollege">College</label>
+                <input class="form-input" id="editCollege" placeholder="Hidden by default on student cards">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editCourse">Course</label>
+                <select class="form-select" id="editCourse">
+                  <option>Diploma</option>
+                  <option selected>B.Tech</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editBranch">Branch</label>
+                <select class="form-select" id="editBranch">
+                  <option>CSE</option>
+                  <option>ECE</option>
+                  <option>EEE</option>
+                  <option>Mechanical</option>
+                  <option>Civil</option>
+                  <option>IT</option>
+                  <option>AI & ML</option>
+                  <option>Data Science</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="editYear">Year</label>
+                <select class="form-select" id="editYear">
+                  <option>1st Year</option>
+                  <option selected>2nd Year</option>
+                  <option>3rd Year</option>
+                  <option>4th Year</option>
+                </select>
+              </div>
+              <div class="profile-actions">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="profile-section">
+            <h3 class="profile-section-title">Privacy settings</h3>
+            <p style="font-size:var(--font-size-sm);margin-bottom:var(--space-4)">Phone numbers are never displayed. Only course, branch, and year are visible by default.</p>
+            <div class="privacy-item">
+              <div class="privacy-item-info">
+                <h4>Hide Name</h4>
+                <p>Keep your real name private. Peers see your anonymous username.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideName" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-item-info">
+                <h4>Hide College</h4>
+                <p>Do not show your college on student cards.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideCollege">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-item-info">
+                <h4>Hide Email</h4>
+                <p>Email stays off public profiles.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideEmail" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-item-info">
+                <h4>Hide Online Status</h4>
+                <p>Appear offline to other students.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideOnline">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="privacy-item">
+              <div class="privacy-item-info">
+                <h4>Hide Profile Photo</h4>
+                <p>Show initials instead of a photo.</p>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hidePhoto">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/profile.js"></script>
+</body>
+</html>

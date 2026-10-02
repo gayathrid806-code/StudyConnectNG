@@ -1,0 +1,293 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "fullName": "Demo Coder",
+      "email": "coder@studyconnect.edu",
+      "passwordHash": "$2a$10$IonX65GL.87YSv3DlrtL.e5KjOnhW4bP50inDjfANH118QlP3WCX2",
+      "username": "Coder_2847",
+      "college": "ABC Polytechnic",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "2nd Year",
+      "semester": "Semester 4",
+      "subjects": [
+        "Data Structures"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788182217808,
+      "setupComplete": true
+    },
+    {
+      "id": "u2",
+      "fullName": "Demo Techie",
+      "email": "techie@studyconnect.edu",
+      "passwordHash": "$2a$10$IonX65GL.87YSv3DlrtL.e5KjOnhW4bP50inDjfANH118QlP3WCX2",
+      "username": "Techie_9012",
+      "college": "XYZ Engineering",
+      "course": "B.Tech",
+      "branch": "ECE",
+      "year": "3rd Year",
+      "semester": "Semester 6",
+      "subjects": [],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788182217808,
+      "setupComplete": true
+    },
+    {
+      "id": "u3",
+      "fullName": "Demo Scholar",
+      "email": "scholar@studyconnect.edu",
+      "passwordHash": "$2a$10$IonX65GL.87YSv3DlrtL.e5KjOnhW4bP50inDjfANH118QlP3WCX2",
+      "username": "Scholar_1156",
+      "college": "Tech University",
+      "course": "B.Tech",
+      "branch": "AI & ML",
+      "year": "3rd Year",
+      "semester": "Semester 5",
+      "subjects": [],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": false,
+      "lastSeen": 1788171417808,
+      "setupComplete": true
+    },
+    {
+      "id": "mth9n0oo2ls1lh",
+      "fullName": "gaya",
+      "email": "gayathrid806@gmail.com",
+      "passwordHash": "$2a$10$CJLtiT/qnKpRbN4fxftM0OskDzjnXDakujZgBTKZQ3okDcnOChsIO",
+      "username": "Student_2944",
+      "college": "aith",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "2nd Year",
+      "semester": "Semester 5",
+      "subjects": [
+        ".net programming through c#"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788183987943,
+      "setupComplete": true
+    },
+    {
+      "id": "mth9yfxqc64zdm",
+      "fullName": "gayathei",
+      "email": "collage@233.gamil.com",
+      "passwordHash": "$2a$10$E5CkFedQGXJIA/uQ/3WSOeuEei1Me4EyNohKfJl4QKczGWKb1ffr.",
+      "username": "Student_4561",
+      "college": "aith",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "3rd Year",
+      "semester": "Semester 3",
+      "subjects": [
+        " digital electroics"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788182946520,
+      "setupComplete": true
+    },
+    {
+      "id": "mthax0j5zwgcuy",
+      "fullName": "ghh",
+      "email": "gayathri@123.gemil.com",
+      "passwordHash": "$2a$10$BYdV9BYJjNeCQFk1DzhK5O/8TieRh7Pa0kwOA2GZuh/3Wm5Yyso1q",
+      "username": "Student_9740",
+      "college": "asdf",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "3rd Year",
+      "semester": "Semester 5",
+      "subjects": [
+        "software engineering"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788184559525,
+      "setupComplete": true
+    },
+    {
+      "id": "mtidwu49n29sm9",
+      "fullName": "gayathri",
+      "email": "gaythri@123.gmail.com",
+      "passwordHash": "$2a$10$RZXDOOXW1319CXj3rOT1ROQzRN4/EZBH26Q6wSz2/swBtWFXrANPy",
+      "username": "Student_8010",
+      "college": "aith",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "3rd Year",
+      "semester": "Semester 5",
+      "subjects": [
+        "Mobile App Development"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788250056245,
+      "setupComplete": true
+    },
+    {
+      "id": "mtied7qa1a32ku",
+      "fullName": "gaytahri",
+      "email": "gaythri@234.gemali.com",
+      "passwordHash": "$2a$10$Ro2r83898FMwTRdAbjVEEuNpdaLUyQ7L2SNXK/UZ0xm/TbsyYu6i6",
+      "username": "Student_5073",
+      "college": "aith",
+      "course": "Diploma",
+      "branch": "CSE",
+      "year": "3rd Year",
+      "semester": "Semester 5",
+      "subjects": [
+        "software engineering"
+      ],
+      "hideName": true,
+      "hideEmail": true,
+      "hideCollege": false,
+      "hideOnline": false,
+      "hidePhoto": true,
+      "photoUrl": null,
+      "online": true,
+      "lastSeen": 1788250820385,
+      "setupComplete": true
+    }
+  ],
+  "doubts": [
+    {
+      "id": "d1",
+      "authorId": "u1",
+      "subject": "Data Structures",
+      "topic": "Linked Lists",
+      "question": "How do I reverse a singly linked list iteratively?",
+      "imageUrl": null,
+      "pdfUrl": null,
+      "createdAt": 1788175017808
+    },
+    {
+      "id": "d2",
+      "authorId": "u2",
+      "subject": "Java",
+      "topic": "OOP",
+      "question": "What is the difference between abstract class and interface in Java?",
+      "imageUrl": null,
+      "pdfUrl": null,
+      "createdAt": 1788164217808
+    }
+  ],
+  "answers": [
+    {
+      "id": "a1",
+      "doubtId": "d1",
+      "authorId": "u2",
+      "text": "Use three pointers: prev, current, and next. Iterate through the list reversing the next pointer of each node.",
+      "accepted": true,
+      "createdAt": 1788176817808
+    }
+  ],
+  "likes": [
+    {
+      "answerId": "a1",
+      "userId": "u3"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "c1",
+      "userIds": [
+        "u1",
+        "u2"
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "m1",
+      "conversationId": "c1",
+      "senderId": "u2",
+      "type": "text",
+      "text": "Hey! Did you figure out reversing a linked list?",
+      "fileUrl": null,
+      "createdAt": 1788181017808
+    },
+    {
+      "id": "m2",
+      "conversationId": "c1",
+      "senderId": "u1",
+      "type": "text",
+      "text": "Almost — I keep mixing up the next pointer.",
+      "fileUrl": null,
+      "createdAt": 1788181137808
+    }
+  ],
+  "notes": [],
+  "notifications": [
+    {
+      "id": "mtieelpzq0401x",
+      "userId": "mtied7qa1a32ku",
+      "type": "ai",
+      "title": "AI response",
+      "text": "Your AI assistant finished an explanation.",
+      "link": "ai-assistant.html",
+      "read": false,
+      "createdAt": 1788250884983
+    },
+    {
+      "id": "mth9zxpxfihxk4",
+      "userId": "mth9yfxqc64zdm",
+      "type": "ai",
+      "title": "AI response",
+      "text": "Your AI assistant finished an explanation.",
+      "link": "ai-assistant.html",
+      "read": false,
+      "createdAt": 1788183016053
+    },
+    {
+      "id": "n1",
+      "userId": "u1",
+      "type": "answer",
+      "title": "New answer",
+      "text": "Techie_9012 answered your doubt on Linked Lists.",
+      "link": "doubt.html",
+      "read": false,
+      "createdAt": 1788175017808
+    }
+  ],
+  "friendRequests": []
+}

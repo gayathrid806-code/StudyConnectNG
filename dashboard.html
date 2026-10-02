@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="StudyConnectNG dashboard — recent doubts, peers, and quick actions.">
+  <title>Dashboard — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Dashboard"></div>
+      <main class="app-content">
+        <section class="welcome-card" id="welcomeCard">
+          <h2>Welcome back, Student_4821</h2>
+          <p>Connect with classmates, clear doubts, and keep your notes organized — all in one place.</p>
+          <div class="welcome-card-actions">
+            <a href="doubt.html" class="btn">Ask a Doubt</a>
+            <a href="chat.html" class="btn">Open Chat</a>
+            <a href="ai-assistant.html" class="btn btn-accent">Ask AI Assistant</a>
+          </div>
+        </section>
+
+        <div class="dashboard-search">
+          <div class="search-bar">
+            <span class="search-bar-icon" id="dashSearchIcon"></span>
+            <input type="search" id="dashboardSearch" placeholder="Search students by username, branch, or college..." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="quick-actions">
+          <a href="search.html" class="quick-action">
+            <div class="quick-action-icon" id="qaUsers"></div>
+            <span class="quick-action-label">Find Students</span>
+          </a>
+          <a href="doubt.html" class="quick-action">
+            <div class="quick-action-icon" id="qaHelp"></div>
+            <span class="quick-action-label">Ask Doubt</span>
+          </a>
+          <a href="notes.html" class="quick-action">
+            <div class="quick-action-icon" id="qaBook"></div>
+            <span class="quick-action-label">Notes</span>
+          </a>
+          <a href="ai-assistant.html" class="quick-action">
+            <div class="quick-action-icon accent" id="qaBot"></div>
+            <span class="quick-action-label">AI Assistant</span>
+          </a>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <h3 class="card-title">Recent Doubts</h3>
+                <p class="card-subtitle">Latest questions from your academic community</p>
+              </div>
+              <a href="doubt.html" class="btn btn-sm btn-ghost">View all</a>
+            </div>
+            <div id="recentDoubts"></div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:var(--space-6)">
+              <div class="card-header">
+                <h3 class="card-title">Active Students</h3>
+                <p class="card-subtitle">Peers currently online</p>
+              </div>
+              <div id="activeStudents"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header" style="display:flex;justify-content:space-between;align-items:center">
+                <h3 class="card-title">Notifications</h3>
+                <a href="notifications.html" class="btn btn-sm btn-ghost">See all</a>
+              </div>
+              <div id="dashNotifications"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/dashboard.js"></script>
+</body>
+</html>

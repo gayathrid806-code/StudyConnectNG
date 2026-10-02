@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Messages"></div>
+      <main class="app-content">
+        <div class="chat-layout">
+          <aside class="chat-sidebar">
+            <div class="chat-sidebar-header">
+              <div class="search-bar">
+                <span class="search-bar-icon" id="convSearchIcon"></span>
+                <input type="search" placeholder="Search conversations...">
+              </div>
+            </div>
+            <div class="chat-conversations" id="chatConversations"></div>
+          </aside>
+
+          <section class="chat-main">
+            <header class="chat-header">
+              <div class="avatar avatar-md avatar-online">C</div>
+              <div class="chat-header-info">
+                <h3 id="chatHeaderName">Coder_2847</h3>
+                <p class="chat-header-status" id="chatHeaderStatus">Online</p>
+              </div>
+              <div class="chat-header-actions">
+                <button class="btn btn-icon btn-ghost" id="chatSearchToggle" aria-label="Search messages"></button>
+                <a href="voice-call.html" class="btn btn-icon btn-ghost" aria-label="Voice call" id="chatCallBtn"></a>
+              </div>
+            </header>
+
+            <div class="chat-search-bar" id="chatSearchBar">
+              <div class="search-bar">
+                <span class="search-bar-icon" id="msgSearchIcon"></span>
+                <input type="search" id="messageSearch" placeholder="Search messages...">
+              </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-message received">
+                <div class="chat-message-bubble">Hey! Did you figure out reversing a linked list?</div>
+                <span class="chat-message-time">10:12</span>
+              </div>
+              <div class="chat-message sent">
+                <div class="chat-message-bubble">Almost — I keep mixing up the next pointer.</div>
+                <span class="chat-message-time">10:14</span>
+              </div>
+              <div class="chat-message received">
+                <div class="chat-message-bubble">Use three pointers: prev, current, and next. Iterate and reverse each link.</div>
+                <span class="chat-message-time">10:15</span>
+              </div>
+              <div class="typing-indicator" id="typingIndicator" style="display:none">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div class="chat-input-area">
+              <div class="emoji-picker" id="emojiPicker"></div>
+              <div class="chat-input-toolbar">
+                <button type="button" class="btn btn-icon btn-ghost" id="emojiBtn" aria-label="Emoji"></button>
+                <label class="btn btn-icon btn-ghost" aria-label="Share file">
+                  <span id="fileIcon"></span>
+                  <input type="file" id="fileUpload" hidden accept=".pdf,.doc,.docx,.txt,.zip">
+                </label>
+                <label class="btn btn-icon btn-ghost" aria-label="Share image">
+                  <span id="imageIcon"></span>
+                  <input type="file" id="imageUpload" hidden accept="image/*">
+                </label>
+                <button type="button" class="btn btn-icon btn-ghost" id="voiceBtn" aria-label="Voice message"></button>
+              </div>
+              <div class="chat-input-row">
+                <textarea id="chatInput" rows="1" placeholder="Type a message..."></textarea>
+                <button type="button" class="chat-send-btn" id="chatSend" aria-label="Send"></button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/chat.js"></script>
+  <script>
+    document.getElementById('convSearchIcon').innerHTML = Icons.search;
+    document.getElementById('msgSearchIcon').innerHTML = Icons.search;
+    document.getElementById('chatSearchToggle').innerHTML = Icons.search;
+    document.getElementById('chatCallBtn').innerHTML = Icons.phone;
+    document.getElementById('emojiBtn').innerHTML = Icons.emoji;
+    document.getElementById('fileIcon').innerHTML = Icons.paperclip;
+    document.getElementById('imageIcon').innerHTML = Icons.image;
+    document.getElementById('voiceBtn').innerHTML = Icons.mic;
+    document.getElementById('chatSend').innerHTML = Icons.send;
+
+    const params = new URLSearchParams(location.search);
+    const user = params.get('user');
+    if (user) {
+      document.getElementById('chatHeaderName').textContent = user;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Notes"></div>
+      <main class="app-content">
+        <section class="notes-hero">
+          <h2>Study Notes</h2>
+          <p>All subjects are in one list. Select a subject to open its topics, then upload or open notes.</p>
+        </section>
+
+        <div class="notes-panels">
+          <article class="notes-listbox-card">
+            <div class="notes-listbox-header">
+              <h3>Subjects</h3>
+              <span class="badge badge-primary" id="subjectCount">0</span>
+            </div>
+            <div class="search-bar notes-search">
+              <span class="search-bar-icon" id="subjectSearchIcon"></span>
+              <input type="search" id="subjectSearch" placeholder="Search subjects...">
+            </div>
+            <ul class="notes-listbox" id="subjectList" role="listbox" aria-label="Subjects"></ul>
+          </article>
+
+          <article class="notes-listbox-card" id="topicPanel">
+            <div class="notes-listbox-header">
+              <h3 id="topicBoxTitle">Select a subject</h3>
+              <span class="badge badge-accent" id="topicCount">0</span>
+            </div>
+            <div class="search-bar notes-search">
+              <span class="search-bar-icon" id="topicSearchIcon"></span>
+              <input type="search" id="topicSearch" placeholder="Search topics in this subject..." disabled>
+            </div>
+            <ul class="notes-listbox" id="topicList" role="listbox" aria-label="Topics"></ul>
+            <div class="notes-topic-actions" id="topicActions" hidden>
+              <button type="button" class="btn btn-sm btn-primary" id="uploadTopicBtn"></button>
+              <input type="file" id="uploadTopicFile" hidden accept=".pdf,.doc,.docx,.ppt,.pptx,.txt">
+              <h4 class="notes-files-title">Uploaded files</h4>
+              <ul class="notes-file-list" id="uploadedNotes"></ul>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/notes-curriculum.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/notes.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Setup — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="auth-layout">
+    <div class="auth-panel" style="justify-content:flex-start;padding-top:var(--space-12)">
+      <div class="setup-container">
+        <div class="auth-header">
+          <a href="index.html" class="auth-logo"><span id="logoIcon"></span> StudyConnectNG</a>
+          <h1>Complete Your Profile</h1>
+          <p>Help us connect you with the right students</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+          <div class="progress-step active">1</div>
+          <div class="progress-line"></div>
+          <div class="progress-step">2</div>
+          <div class="progress-line"></div>
+          <div class="progress-step">3</div>
+          <div class="progress-line"></div>
+          <div class="progress-step">4</div>
+          <div class="progress-line"></div>
+          <div class="progress-step">5</div>
+        </div>
+
+        <!-- Step 1: Course -->
+        <div class="setup-step active" data-step="1">
+          <div class="setup-step-header">
+            <h2>Choose Your Course</h2>
+            <p>Select the program you're enrolled in</p>
+          </div>
+          <div class="selection-grid" data-field="course">
+            <div class="selection-card" data-value="Diploma">
+              <div class="selection-card-icon" id="diplomaIcon"></div>
+              <span class="selection-card-label">Diploma</span>
+            </div>
+            <div class="selection-card" data-value="B.Tech">
+              <div class="selection-card-icon" id="btechIcon"></div>
+              <span class="selection-card-label">B.Tech</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Branch -->
+        <div class="setup-step" data-step="2">
+          <div class="setup-step-header">
+            <h2>Select Your Branch</h2>
+            <p>Choose your engineering branch or specialization</p>
+          </div>
+          <div class="selection-grid" data-field="branch">
+            <div class="selection-card" data-value="CSE"><span class="selection-card-label">CSE</span></div>
+            <div class="selection-card" data-value="ECE"><span class="selection-card-label">ECE</span></div>
+            <div class="selection-card" data-value="EEE"><span class="selection-card-label">EEE</span></div>
+            <div class="selection-card" data-value="Mechanical"><span class="selection-card-label">Mechanical</span></div>
+            <div class="selection-card" data-value="Civil"><span class="selection-card-label">Civil</span></div>
+            <div class="selection-card" data-value="IT"><span class="selection-card-label">IT</span></div>
+            <div class="selection-card" data-value="AI & ML"><span class="selection-card-label">AI & ML</span></div>
+            <div class="selection-card" data-value="Data Science"><span class="selection-card-label">Data Science</span></div>
+            <div class="selection-card" data-value="Other"><span class="selection-card-label">Other</span></div>
+          </div>
+        </div>
+
+        <!-- Step 3: Year -->
+        <div class="setup-step" data-step="3">
+          <div class="setup-step-header">
+            <h2>Select Your Year</h2>
+            <p>Which year are you currently in?</p>
+          </div>
+          <div class="selection-grid" data-field="year">
+            <div class="selection-card" data-value="1st Year"><span class="selection-card-label">1st Year</span></div>
+            <div class="selection-card" data-value="2nd Year"><span class="selection-card-label">2nd Year</span></div>
+            <div class="selection-card" data-value="3rd Year"><span class="selection-card-label">3rd Year</span></div>
+            <div class="selection-card" data-value="4th Year"><span class="selection-card-label">4th Year</span></div>
+          </div>
+        </div>
+
+        <!-- Step 4: Semester -->
+        <div class="setup-step" data-step="4">
+          <div class="setup-step-header">
+            <h2>Select Semester</h2>
+            <p>Which semester are you in currently?</p>
+          </div>
+          <div class="selection-grid" data-field="semester">
+            <div class="selection-card" data-value="Semester 1"><span class="selection-card-label">Semester 1</span></div>
+            <div class="selection-card" data-value="Semester 2"><span class="selection-card-label">Semester 2</span></div>
+            <div class="selection-card" data-value="Semester 3"><span class="selection-card-label">Semester 3</span></div>
+            <div class="selection-card" data-value="Semester 4"><span class="selection-card-label">Semester 4</span></div>
+            <div class="selection-card" data-value="Semester 5"><span class="selection-card-label">Semester 5</span></div>
+            <div class="selection-card" data-value="Semester 6"><span class="selection-card-label">Semester 6</span></div>
+            <div class="selection-card" data-value="Semester 7"><span class="selection-card-label">Semester 7</span></div>
+            <div class="selection-card" data-value="Semester 8"><span class="selection-card-label">Semester 8</span></div>
+          </div>
+        </div>
+
+        <!-- Step 5: Subjects -->
+        <div class="setup-step" data-step="5">
+          <div class="setup-step-header">
+            <h2>Select Your Subjects</h2>
+            <p>Choose the subjects you're currently studying (select at least one)</p>
+          </div>
+          <div class="selection-grid" id="subjectsGrid" data-field="subjects"></div>
+          <p class="setup-hint" id="subjectsHint" style="display:none;color:var(--color-text-muted);font-size:var(--text-sm);margin-top:var(--space-3)">
+            No subjects found for this course, branch, and semester. You can finish setup and add subjects later.
+          </p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="setup-actions">
+          <button class="btn btn-secondary" id="setupBack" style="visibility:hidden">Back</button>
+          <button class="btn btn-primary" id="setupNext">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-visual">
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-content">
+        <h2>Almost There!</h2>
+        <p>Your profile helps us match you with students who share your academic journey.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/profile-setup.js"></script>
+  <script>
+    document.getElementById('logoIcon').innerHTML = Icons.logo;
+    document.getElementById('diplomaIcon').innerHTML = Icons.book;
+    document.getElementById('btechIcon').innerHTML = Icons.graduation;
+  </script>
+</body>
+</html>

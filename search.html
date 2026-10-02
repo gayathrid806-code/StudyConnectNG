@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Students — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Find Students"></div>
+      <main class="app-content">
+        <div class="filters-panel">
+          <div class="search-bar" style="margin-bottom:var(--space-5)">
+            <span class="search-bar-icon" id="searchIcon"></span>
+            <input type="search" id="studentSearch" placeholder="Search by username, branch, or college...">
+          </div>
+          <div class="filters-grid">
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="filterCourse">Course</label>
+              <select id="filterCourse" class="form-select">
+                <option value="">All courses</option>
+                <option value="Diploma">Diploma</option>
+                <option value="B.Tech">B.Tech</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="filterBranch">Branch</label>
+              <select id="filterBranch" class="form-select">
+                <option value="">All branches</option>
+                <option>CSE</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+                <option>IT</option>
+                <option>AI & ML</option>
+                <option>Data Science</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="filterYear">Year</label>
+              <select id="filterYear" class="form-select">
+                <option value="">All years</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="filterCollege">College</label>
+              <input type="text" id="filterCollege" class="form-input" placeholder="College name">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="form-label" for="filterOnline">Online status</label>
+              <select id="filterOnline" class="form-select">
+                <option value="">All students</option>
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+              </select>
+            </div>
+          </div>
+          <div class="filters-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="clearFilters">Clear filters</button>
+          </div>
+        </div>
+
+        <p class="card-subtitle" style="margin-bottom:var(--space-4)">Anonymous usernames only — phone numbers are never shown.</p>
+        <div class="student-grid" id="studentGrid"></div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/search.js"></script>
+  <script>
+    document.getElementById('searchIcon').innerHTML = Icons.search;
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+/* Dashboard Page Styles */
+
+.welcome-card {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  color: var(--color-white);
+  margin-bottom: var(--space-6);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: rgb(255 255 255 / 0.08);
+  border-radius: var(--radius-full);
+}
+
+.welcome-card h2 {
+  color: var(--color-white);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-2);
+  position: relative;
+}
+
+.welcome-card p {
+  color: rgb(255 255 255 / 0.85);
+  font-size: var(--font-size-sm);
+  position: relative;
+}
+
+.welcome-card-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.welcome-card .btn {
+  background: rgb(255 255 255 / 0.2);
+  color: var(--color-white);
+  border: 1px solid rgb(255 255 255 / 0.3);
+}
+
+.welcome-card .btn:hover {
+  background: rgb(255 255 255 / 0.3);
+}
+
+.welcome-card .btn-accent {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .quick-actions {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  text-align: center;
+  cursor: pointer;
+}
+
+.quick-action:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.quick-action-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary-50);
+  color: var(--color-primary);
+}
+
+.quick-action-icon.accent {
+  background: var(--color-accent-50);
+  color: var(--color-accent);
+}
+
+.quick-action-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-700);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Doubt Preview Cards */
+.doubt-preview {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-gray-100);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+}
+
+.doubt-preview:last-child {
+  border-bottom: none;
+}
+
+.doubt-preview:hover {
+  background: var(--color-gray-50);
+}
+
+.doubt-preview-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.doubt-preview-subject {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.doubt-preview-question {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-800);
+  margin-bottom: var(--space-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doubt-preview-meta {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-400);
+}
+
+.doubt-preview-answers {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  flex-shrink: 0;
+}
+
+/* Active Students */
+.active-student {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-lg);
+  transition: background var(--transition-fast);
+}
+
+.active-student:hover {
+  background: var(--color-gray-50);
+}
+
+.active-student-info {
+  flex: 1;
+}
+
+.active-student-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-gray-800);
+}
+
+.active-student-branch {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+}
+
+/* Dashboard Search */
+.dashboard-search {
+  margin-bottom: var(--space-6);
+}
+
+.dashboard-search .search-bar input {
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-10);
+  font-size: var(--font-size-base);
+  background: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}

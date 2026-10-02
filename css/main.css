@@ -1,0 +1,13 @@
+/* StudyConnect — Main Stylesheet Entry Point */
+@import url('variables.css');
+@import url('base.css');
+@import url('components.css');
+@import url('layout.css');
+@import url('pages/landing.css');
+@import url('pages/auth.css');
+@import url('dashboard.css');
+@import url('pages/chat.css');
+@import url('pages/doubt.css');
+@import url('pages/notes.css');
+@import url('pages/voice-call.css');
+@import url('pages/profile.css');

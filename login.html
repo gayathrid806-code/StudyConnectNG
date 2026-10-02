@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="auth-layout">
+    <div class="auth-panel">
+      <div class="auth-card">
+        <div class="auth-header">
+          <a href="index.html" class="auth-logo"><span id="logoIcon"></span> StudyConnectNG</a>
+          <h1>Welcome Back</h1>
+          <p>Log in to continue learning with your peers</p>
+        </div>
+
+        <form data-validate data-auth="login">
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="you@college.edu" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+            <span class="form-error"></span>
+          </div>
+
+          <div class="forgot-password">
+            <a href="forgot-password.html">Forgot password?</a>
+          </div>
+
+          <div class="auth-form-actions">
+            <button type="submit" class="btn btn-primary">Log In</button>
+          </div>
+        </form>
+
+        <div class="divider">or continue with</div>
+
+        <button class="btn btn-google" type="button" id="googleLogin">
+          <span id="googleIcon"></span> Continue with Google
+        </button>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="register.html">Create account</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="auth-visual">
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-decoration"></div>
+      <div class="auth-visual-content">
+        <h2>Learn Together, Grow Together</h2>
+        <p>Connect with students from your course and branch. Ask doubts, share notes, and help each other succeed.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('logoIcon').innerHTML = Icons.logo;
+    document.getElementById('googleIcon').innerHTML = Icons.google;
+    document.getElementById('googleLogin').addEventListener('click', () => {
+      StudyConnect.toast('Google login is not enabled. Use email login (try coder@studyconnect.edu / Student@123).');
+    });
+  </script>
+</body>
+</html>

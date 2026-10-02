@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Settings"></div>
+      <main class="app-content">
+        <section class="settings-section">
+          <h3 class="settings-section-title">Appearance</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Dark Mode</h4>
+              <p>Switch between light and dark themes.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input" id="darkModeToggle">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Language</h4>
+              <p>Choose the language used across StudyConnectNG.</p>
+            </div>
+            <select class="form-select" id="languageSelect" style="max-width:180px">
+              <option>English</option>
+              <option>Hindi</option>
+              <option>Tamil</option>
+              <option>Telugu</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h3 class="settings-section-title">Notifications</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>New answers</h4>
+              <p>Get notified when someone answers your doubt.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>New messages</h4>
+              <p>Alerts for incoming chats.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>AI responses</h4>
+              <p>Notify when the assistant finishes a long explanation.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </section>
+
+        <section class="settings-section">
+          <h3 class="settings-section-title">Privacy</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Hide Name</h4>
+              <p>Peers only see your anonymous username.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideName" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Hide Email</h4>
+              <p>Email is never shown on student cards.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideEmail" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Hide College</h4>
+              <p>Optional college visibility.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideCollege">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+            <div class="settings-item">
+            <div class="settings-item-info">
+              <h4>Hide Online Status</h4>
+              <p>Appear offline even when you are active.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" class="toggle-input privacy-toggle" data-privacy="hideOnline">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <p style="font-size:var(--font-size-xs);color:var(--color-gray-500);margin-top:var(--space-4)">Phone numbers are never stored on public profiles and cannot be displayed to other students.</p>
+          <a href="profile.html" class="btn btn-sm btn-secondary" style="margin-top:var(--space-4)">Manage profile privacy</a>
+        </section>
+
+        <section class="settings-section">
+          <h3 class="settings-section-title">Account</h3>
+          <div class="settings-item">
+            <div class="settings-item-info">
+              <h4 class="settings-danger">Log out</h4>
+              <p>Sign out of this device. You can log in again anytime.</p>
+            </div>
+            <button type="button" class="btn btn-secondary" id="logoutBtn">Logout</button>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/subjects-index.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/settings.js"></script>
+  <script>
+    document.getElementById('languageSelect').addEventListener('change', (e) => {
+      StudyConnect.toast('Language set to ' + e.target.value);
+    });
+  </script>
+</body>
+</html>
