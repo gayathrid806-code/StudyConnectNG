@@ -158,6 +158,20 @@ class FriendRequest(db.Model):
     created_at = db.Column(db.BigInteger, default=now_ms)
 
 
+class VoiceCall(db.Model):
+    __tablename__ = "voice_calls"
+
+    id = db.Column(db.String(32), primary_key=True, default=new_id)
+    caller_id = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False)
+    callee_id = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False)
+    status = db.Column(db.String(20), default="ringing")
+    offer_json = db.Column(db.Text, default="")
+    answer_json = db.Column(db.Text, default="")
+    caller_ice_json = db.Column(db.Text, default="[]")
+    callee_ice_json = db.Column(db.Text, default="[]")
+    created_at = db.Column(db.BigInteger, default=now_ms)
+
+
 def public_user(user: User | None, viewer: User | None = None) -> dict | None:
     """Academic fields are public. Name, email, and phone are never shown to others."""
     if not user:

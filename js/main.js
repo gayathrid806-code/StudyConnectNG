@@ -38,6 +38,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   StudyConnect.initSidebar();
 
+  if (typeof API !== 'undefined' && API.token() && page !== 'voice-call.html' && page !== 'login.html') {
+    let incomingShown = null;
+    const pollIncoming = async () => {
+      try {
+        const data = await API.request('/api/calls/incoming');
+        const call = data.call;
+        if (!call) {
+          document.querySelector('.incoming-call-overlay')?.remove();
+          incomingShown = null;
+          return;
+        }
+        if (incomingShown === call.id) return;
+        incomingShown = call.id;
+        const overlay = document.createElement('div');
+        overlay.className = 'incoming-call-overlay';
+        overlay.innerHTML = `
+          <div class="incoming-call-card">
+            <p class="incoming-call-label">Incoming voice call</p>
+            <div class="voice-call-avatar ringing">${(call.caller.username || 'S').charAt(0)}</div>
+            <h2 class="voice-call-name">${call.caller.username}</h2>
+            <p class="voice-call-branch">${[call.caller.branch, call.caller.year].filter(Boolean).join(' · ')}</p>
+            <div class="incoming-call-actions">
+              <button type="button" class="voice-call-btn decline" id="declineCallBtn">Decline</button>
+              <button type="button" class="voice-call-btn accept" id="acceptCallBtn">Accept</button>
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        overlay.querySelector('#acceptCallBtn').addEventListener('click', () => {
+          location.href = 'voice-call.html?call=' + encodeURIComponent(call.id) + '&incoming=1';
+        });
+        overlay.querySelector('#declineCallBtn').addEventListener('click', async () => {
+          try { await API.request('/api/calls/' + call.id + '/reject', { method: 'POST', body: '{}' }); } catch (_) {}
+          overlay.remove();
+          incomingShown = null;
+        });
+      } catch (_) {}
+    };
+    pollIncoming();
+    setInterval(pollIncoming, 2000);
+  }
+
   document.addEventListener('click', async (e) => {
     const likeBtn = e.target.closest('.like-btn');
     if (!likeBtn) return;

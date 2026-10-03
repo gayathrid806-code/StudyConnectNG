@@ -72,6 +72,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadMessages();
   }
 
+  document.getElementById('chatCallBtn')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('chatHeaderName')?.textContent?.trim();
+    if (!name || !conversationId) {
+      StudyConnect.toast('Open a student chat first, then tap Call');
+      return;
+    }
+    location.href = 'voice-call.html?user=' + encodeURIComponent(name);
+  });
+
   async function loadConversations() {
     const data = await API.request('/api/conversations');
     if (!listEl) return;

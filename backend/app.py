@@ -12,6 +12,7 @@ Phone numbers are never stored.
 
 from __future__ import annotations
 
+import json
 import os
 import random
 import sys
@@ -40,6 +41,7 @@ from models import (  # noqa: E402
     Note,
     Notification,
     User,
+    VoiceCall,
     clock_time,
     db,
     format_doubt,
@@ -585,6 +587,140 @@ def create_app() -> Flask:
         notify(g.user.id, "ai", "AI response", "Your AI assistant finished an explanation.", "ai-assistant.html")
         db.session.commit()
         return jsonify({"answer": answer})
+
+    def serialize_call(call: VoiceCall):
+        caller = db.session.get(User, call.caller_id)
+        callee = db.session.get(User, call.callee_id)
+        return {
+            "id": call.id,
+            "status": call.status,
+            "caller": public_user(caller),
+            "callee": public_user(callee),
+            "offer": json.loads(call.offer_json) if call.offer_json else None,
+            "answer": json.loads(call.answer_json) if call.answer_json else None,
+            "callerIce": json.loads(call.caller_ice_json or "[]"),
+            "calleeIce": json.loads(call.callee_ice_json or "[]"),
+        }
+
+    def user_in_call(call: VoiceCall) -> bool:
+        return g.user.id in (call.caller_id, call.callee_id)
+
+    @app.post("/api/calls")
+    @auth_required
+    def start_call():
+        body = json_body()
+        username = (body.get("username") or "").strip()
+        offer = body.get("offer")
+        other = User.query.filter_by(username=username).first()
+        if not other:
+            return jsonify({"error": "Student not found"}), 404
+        if other.id == g.user.id:
+            return jsonify({"error": "You cannot call yourself"}), 400
+        if not offer:
+            return jsonify({"error": "Call offer is missing"}), 400
+        existing = VoiceCall.query.filter(
+            VoiceCall.status.in_(("ringing", "answered")),
+            ((VoiceCall.caller_id == g.user.id) | (VoiceCall.callee_id == g.user.id)),
+        ).first()
+        if existing:
+            existing.status = "ended"
+        call = VoiceCall(
+            id=new_id(),
+            caller_id=g.user.id,
+            callee_id=other.id,
+            status="ringing",
+            offer_json=json.dumps(offer),
+        )
+        db.session.add(call)
+        notify(
+            other.id,
+            "message",
+            "Incoming voice call",
+            f"{g.user.username} is calling you. Open the app to answer.",
+            "voice-call.html?call=" + call.id + "&incoming=1",
+        )
+        db.session.commit()
+        return jsonify({"call": serialize_call(call)})
+
+    @app.get("/api/calls/incoming")
+    @auth_required
+    def incoming_call():
+        cutoff = now_ms() - 45000
+        stale = VoiceCall.query.filter(VoiceCall.status == "ringing", VoiceCall.created_at < cutoff).all()
+        for item in stale:
+            item.status = "ended"
+        if stale:
+            db.session.commit()
+        call = (
+            VoiceCall.query.filter_by(callee_id=g.user.id, status="ringing")
+            .order_by(VoiceCall.created_at.desc())
+            .first()
+        )
+        return jsonify({"call": serialize_call(call) if call else None})
+
+    @app.get("/api/calls/<call_id>")
+    @auth_required
+    def get_call(call_id):
+        call = db.session.get(VoiceCall, call_id)
+        if not call or not user_in_call(call):
+            return jsonify({"error": "Call not found"}), 404
+        return jsonify({"call": serialize_call(call)})
+
+    @app.post("/api/calls/<call_id>/answer")
+    @auth_required
+    def answer_call(call_id):
+        call = db.session.get(VoiceCall, call_id)
+        if not call or call.callee_id != g.user.id:
+            return jsonify({"error": "Call not found"}), 404
+        if call.status == "ended":
+            return jsonify({"error": "Call already ended"}), 400
+        answer = json_body().get("answer")
+        if not answer:
+            return jsonify({"error": "Call answer is missing"}), 400
+        call.answer_json = json.dumps(answer)
+        call.status = "answered"
+        db.session.commit()
+        return jsonify({"call": serialize_call(call)})
+
+    @app.post("/api/calls/<call_id>/ice")
+    @auth_required
+    def add_ice(call_id):
+        call = db.session.get(VoiceCall, call_id)
+        if not call or not user_in_call(call):
+            return jsonify({"error": "Call not found"}), 404
+        candidate = json_body().get("candidate")
+        if not candidate:
+            return jsonify({"ok": True})
+        if g.user.id == call.caller_id:
+            items = json.loads(call.caller_ice_json or "[]")
+            items.append(candidate)
+            call.caller_ice_json = json.dumps(items)
+        else:
+            items = json.loads(call.callee_ice_json or "[]")
+            items.append(candidate)
+            call.callee_ice_json = json.dumps(items)
+        db.session.commit()
+        return jsonify({"ok": True})
+
+    @app.post("/api/calls/<call_id>/end")
+    @auth_required
+    def end_call_api(call_id):
+        call = db.session.get(VoiceCall, call_id)
+        if not call or not user_in_call(call):
+            return jsonify({"error": "Call not found"}), 404
+        call.status = "ended"
+        db.session.commit()
+        return jsonify({"ok": True})
+
+    @app.post("/api/calls/<call_id>/reject")
+    @auth_required
+    def reject_call(call_id):
+        call = db.session.get(VoiceCall, call_id)
+        if not call or call.callee_id != g.user.id:
+            return jsonify({"error": "Call not found"}), 404
+        call.status = "ended"
+        db.session.commit()
+        return jsonify({"ok": True})
 
     @app.errorhandler(RequestEntityTooLarge)
     def too_large(_error):
