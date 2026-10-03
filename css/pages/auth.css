@@ -150,6 +150,11 @@
 
 .student-card-actions {
   flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 280px;
+  justify-content: flex-end;
 }
 
 /* Notifications Page */

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaints — StudyConnectNG</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="app-layout">
+    <div id="sidebarMount"></div>
+    <div class="app-main">
+      <div id="headerMount" data-title="Complaints"></div>
+      <main class="app-content">
+        <p class="card-subtitle" style="margin-bottom:var(--space-4)">
+          Reports are private. Other students cannot see them. Only you and the app owner can read a complaint.
+          Never write a phone number.
+        </p>
+        <form id="complaintForm" class="card" style="padding:20px;margin-bottom:24px;background:#fff;border-radius:16px">
+          <div class="form-group">
+            <label class="form-label" for="complaintCategory">Type</label>
+            <select id="complaintCategory" class="form-select">
+              <option value="misbehaviour">Misbehaviour</option>
+              <option value="miscommunication">Miscommunication</option>
+              <option value="doubt">Private doubt / help needed</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="complaintAbout">Student username (optional)</label>
+            <input type="text" id="complaintAbout" class="form-input" placeholder="e.g. Coder_2847">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="complaintText">What happened?</label>
+            <textarea id="complaintText" class="form-textarea" rows="4" required placeholder="Write only for the owner. No phone numbers."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send privately</button>
+        </form>
+        <h3 id="listTitle">My complaints</h3>
+        <div id="complaintList"></div>
+        <h3 style="margin-top:28px">Blocked students</h3>
+        <div id="blockedList"></div>
+      </main>
+    </div>
+  </div>
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/pages/complaints.js"></script>
+</body>
+</html>

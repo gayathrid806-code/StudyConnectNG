@@ -33,6 +33,8 @@ if str(BACKEND) not in sys.path:
 
 from models import (  # noqa: E402
     Answer,
+    Block,
+    Complaint,
     Conversation,
     Doubt,
     FriendRequest,
@@ -51,6 +53,7 @@ from models import (  # noqa: E402
     public_user,
     time_ago,
 )
+from ai_tutor import answer_question  # noqa: E402
 
 JWT_SECRET = os.environ.get("JWT_SECRET", "studyconnect-dev-secret-change-me")
 # On Render, set PERSIST_DIR=/data and attach a disk at /data so notes survive restarts.
@@ -63,25 +66,8 @@ else:
     UPLOAD_ROOT = BACKEND / "uploads"
 ALLOWED_EXT = {".png", ".jpg", ".jpeg", ".gif", ".webp", ".pdf", ".txt", ".doc", ".docx", ".ppt", ".pptx", ".zip", ".mp3", ".wav", ".webm"}
 
-AI_FALLBACK = {
-    "pointer": (
-        "Pointers in C are variables that store memory addresses. They allow direct memory "
-        "manipulation and are essential for dynamic memory allocation, arrays, and function "
-        "arguments passed by reference.\n\nKey concepts:\n• Declaration: `int *ptr;`\n"
-        "• Address-of operator: `ptr = &variable;`\n• Dereference: `*ptr = value;`"
-    ),
-    "oop": (
-        "Java OOP has four pillars:\n\n1. **Encapsulation** — Bundling data and methods, hiding internal state\n"
-        "2. **Inheritance** — Child classes inherit from parent (`extends`)\n"
-        "3. **Polymorphism** — Same interface, different implementations\n"
-        "4. **Abstraction** — Hiding complexity (`abstract class`, `interface`)"
-    ),
-    "normalization": (
-        "Database Normalization reduces redundancy:\n\n• **1NF** — Atomic values, no repeating groups\n"
-        "• **2NF** — 1NF + no partial dependencies\n• **3NF** — 2NF + no transitive dependencies\n\n"
-        "Example: Split a table with (StudentID, Name, Course, Instructor) into separate Student and Course tables."
-    ),
-}
+AI_FALLBACK = {}
+OWNER_EMAIL = (os.environ.get("OWNER_EMAIL") or "coder@studyconnect.edu").strip().lower()
  
 def create_app() -> Flask:
     app = Flask(__name__, static_folder=str(ROOT), static_url_path="")
@@ -124,6 +110,24 @@ def create_app() -> Flask:
             g.user = user
             return fn(*args, **kwargs)
         return wrapper
+
+    def is_owner(user: User) -> bool:
+        return (user.email or "").lower() == OWNER_EMAIL
+
+    def blocked_pair(a: str, b: str) -> bool:
+        return bool(
+            Block.query.filter(
+                ((Block.blocker_id == a) & (Block.blocked_id == b))
+                | ((Block.blocker_id == b) & (Block.blocked_id == a))
+            ).first()
+        )
+
+    def blocked_ids_for(user_id: str) -> set[str]:
+        rows = Block.query.filter((Block.blocker_id == user_id) | (Block.blocked_id == user_id)).all()
+        ids = set()
+        for row in rows:
+            ids.add(row.blocked_id if row.blocker_id == user_id else row.blocker_id)
+        return ids
 
     
     def save_upload(file_storage, folder: str):
@@ -283,6 +287,8 @@ def create_app() -> Flask:
                 or q in (u.branch or "").lower()
                 or (not u.hide_college and q in (u.college or "").lower())
             ]
+        hidden = blocked_ids_for(g.user.id)
+        rows = [u for u in rows if u.id not in hidden]
         return jsonify({"students": [public_user(u) for u in rows]})
 
     @app.get("/api/students/<username>")
@@ -385,6 +391,8 @@ def create_app() -> Flask:
         for conv in convs:
             last = Message.query.filter_by(conversation_id=conv.id).order_by(Message.created_at.desc()).first()
             other = other_user(conv, uid)
+            if other and blocked_pair(uid, other.id):
+                continue
             out.append({
                 "id": conv.id,
                 "student": public_user(other),
@@ -402,6 +410,8 @@ def create_app() -> Flask:
             return jsonify({"error": "Student not found"}), 404
         if other.id == g.user.id:
             return jsonify({"error": "Cannot chat with yourself"}), 400
+        if blocked_pair(g.user.id, other.id):
+            return jsonify({"error": "You cannot chat with this student"}), 403
         conv = Conversation.query.filter(
             ((Conversation.user_a == g.user.id) & (Conversation.user_b == other.id))
             | ((Conversation.user_a == other.id) & (Conversation.user_b == g.user.id))
@@ -572,18 +582,7 @@ def create_app() -> Flask:
         question = (json_body().get("question") or "").strip()
         if not question:
             return jsonify({"error": "Ask an academic question"}), 400
-        q = question.lower()
-        if "pointer" in q:
-            answer = AI_FALLBACK["pointer"]
-        elif "java" in q or "oop" in q:
-            answer = AI_FALLBACK["oop"]
-        elif "normalization" in q or "dbms" in q:
-            answer = AI_FALLBACK["normalization"]
-        else:
-            answer = (
-                "That is a good academic question. Break it into smaller concepts first. "
-                "If no classmate can help, try restating the topic (for example: pointers, Java OOP, or DBMS normalization)."
-            )
+        answer = answer_question(question)
         notify(g.user.id, "ai", "AI response", "Your AI assistant finished an explanation.", "ai-assistant.html")
         db.session.commit()
         return jsonify({"answer": answer})
@@ -616,6 +615,8 @@ def create_app() -> Flask:
             return jsonify({"error": "Student not found"}), 404
         if other.id == g.user.id:
             return jsonify({"error": "You cannot call yourself"}), 400
+        if blocked_pair(g.user.id, other.id):
+            return jsonify({"error": "You cannot call this student"}), 403
         if not offer:
             return jsonify({"error": "Call offer is missing"}), 400
         existing = VoiceCall.query.filter(
@@ -721,6 +722,85 @@ def create_app() -> Flask:
         call.status = "ended"
         db.session.commit()
         return jsonify({"ok": True})
+
+    @app.get("/api/blocks")
+    @auth_required
+    def list_blocks():
+        rows = Block.query.filter_by(blocker_id=g.user.id).all()
+        users = []
+        for row in rows:
+            other = db.session.get(User, row.blocked_id)
+            if other:
+                users.append(public_user(other))
+        return jsonify({"blocked": users})
+
+    @app.post("/api/blocks")
+    @auth_required
+    def add_block():
+        username = (json_body().get("username") or "").strip()
+        other = User.query.filter_by(username=username).first()
+        if not other:
+            return jsonify({"error": "Student not found"}), 404
+        if other.id == g.user.id:
+            return jsonify({"error": "You cannot block yourself"}), 400
+        existing = Block.query.filter_by(blocker_id=g.user.id, blocked_id=other.id).first()
+        if not existing:
+            db.session.add(Block(id=new_id(), blocker_id=g.user.id, blocked_id=other.id))
+            db.session.commit()
+        return jsonify({"ok": True})
+
+    @app.delete("/api/blocks/<username>")
+    @auth_required
+    def remove_block(username):
+        other = User.query.filter_by(username=username).first()
+        if not other:
+            return jsonify({"error": "Student not found"}), 404
+        Block.query.filter_by(blocker_id=g.user.id, blocked_id=other.id).delete()
+        db.session.commit()
+        return jsonify({"ok": True})
+
+    @app.get("/api/complaints")
+    @auth_required
+    def list_complaints():
+        if is_owner(g.user):
+            rows = Complaint.query.order_by(Complaint.created_at.desc()).all()
+        else:
+            rows = Complaint.query.filter_by(author_id=g.user.id).order_by(Complaint.created_at.desc()).all()
+        out = []
+        for row in rows:
+            author = db.session.get(User, row.author_id)
+            item = {
+                "id": row.id,
+                "aboutUsername": row.about_username,
+                "category": row.category,
+                "text": row.text,
+                "time": time_ago(row.created_at),
+                "mine": row.author_id == g.user.id,
+            }
+            if is_owner(g.user):
+                item["fromUsername"] = author.username if author else "Student"
+            out.append(item)
+        return jsonify({"complaints": out, "isOwner": is_owner(g.user)})
+
+    @app.post("/api/complaints")
+    @auth_required
+    def create_complaint():
+        body = json_body()
+        text = (body.get("text") or "").strip()
+        category = (body.get("category") or "misbehaviour").strip()
+        about = (body.get("aboutUsername") or "").strip()
+        if not text:
+            return jsonify({"error": "Write what happened"}), 400
+        row = Complaint(
+            id=new_id(),
+            author_id=g.user.id,
+            about_username=about,
+            category=category,
+            text=text,
+        )
+        db.session.add(row)
+        db.session.commit()
+        return jsonify({"ok": True, "id": row.id})
 
     @app.errorhandler(RequestEntityTooLarge)
     def too_large(_error):

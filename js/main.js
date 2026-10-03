@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const appPages = [
     'dashboard.html', 'search.html', 'chat.html', 'doubt.html', 'ai-assistant.html',
     'notes.html', 'notifications.html', 'profile.html', 'settings.html', 'voice-call.html',
-    'profile-setup.html'
+    'profile-setup.html', 'complaints.html'
   ];
   if (typeof API !== 'undefined' && appPages.includes(page) && !API.token()) {
     location.href = 'login.html';

@@ -51,4 +51,35 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('studentSearch').value = preset;
   }
   applyFilters();
+
+  grid?.addEventListener('click', async (e) => {
+    const blockBtn = e.target.closest('.js-block-student');
+    const reportBtn = e.target.closest('.js-report-student');
+    if (blockBtn) {
+      const username = blockBtn.dataset.username;
+      if (!confirm('Block ' + username + '? They will not be able to chat or call you. Phone numbers are never shown.')) return;
+      try {
+        await API.request('/api/blocks', { method: 'POST', body: JSON.stringify({ username }) });
+        StudyConnect.toast(username + ' blocked');
+        applyFilters();
+      } catch (err) {
+        StudyConnect.toast(err.message);
+      }
+      return;
+    }
+    if (reportBtn) {
+      const username = reportBtn.dataset.username;
+      const text = prompt('Describe the problem. Only you and the app owner will see this. Do not write phone numbers.');
+      if (!text || !text.trim()) return;
+      try {
+        await API.request('/api/complaints', {
+          method: 'POST',
+          body: JSON.stringify({ aboutUsername: username, category: 'misbehaviour', text: text.trim() })
+        });
+        StudyConnect.toast('Complaint sent privately to the owner');
+      } catch (err) {
+        StudyConnect.toast(err.message);
+      }
+    }
+  });
 });

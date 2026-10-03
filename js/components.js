@@ -11,6 +11,7 @@ const StudyConnect = {
     { href: 'doubt.html', icon: 'help', label: 'Ask Doubt' },
     { href: 'ai-assistant.html', icon: 'bot', label: 'AI Assistant' },
     { href: 'notes.html', icon: 'book', label: 'Notes' },
+    { href: 'complaints.html', icon: 'help', label: 'Complaints' },
     { href: 'notifications.html', icon: 'bell', label: 'Notifications', badge: 3 },
     { href: 'profile.html', icon: 'user', label: 'Profile' },
     { href: 'settings.html', icon: 'settings', label: 'Settings' }
@@ -244,7 +245,10 @@ const StudyConnect = {
           </div>
         </div>
         <div class="student-card-actions">
-          <a href="chat.html?user=${student.username}" class="btn btn-sm btn-primary">${Icons.message} Chat</a>
+          <a href="voice-call.html?user=${student.username}" class="btn btn-sm btn-primary">${Icons.phone} Call</a>
+          <a href="chat.html?user=${student.username}" class="btn btn-sm btn-secondary">${Icons.message} Chat</a>
+          <button type="button" class="btn btn-sm btn-ghost js-block-student" data-username="${student.username}">Block</button>
+          <button type="button" class="btn btn-sm btn-ghost js-report-student" data-username="${student.username}">Report</button>
         </div>
       </div>`;
   },

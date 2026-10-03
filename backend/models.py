@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 import uuid
 from datetime import datetime
@@ -172,6 +173,25 @@ class VoiceCall(db.Model):
     created_at = db.Column(db.BigInteger, default=now_ms)
 
 
+class Block(db.Model):
+    __tablename__ = "blocks"
+
+    id = db.Column(db.String(32), primary_key=True, default=new_id)
+    blocker_id = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False)
+    blocked_id = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False)
+
+
+class Complaint(db.Model):
+    __tablename__ = "complaints"
+
+    id = db.Column(db.String(32), primary_key=True, default=new_id)
+    author_id = db.Column(db.String(32), db.ForeignKey("users.id"), nullable=False)
+    about_username = db.Column(db.String(80), default="")
+    category = db.Column(db.String(80), default="misbehaviour")
+    text = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.BigInteger, default=now_ms)
+
+
 def public_user(user: User | None, viewer: User | None = None) -> dict | None:
     """Academic fields are public. Name, email, and phone are never shown to others."""
     if not user:
@@ -205,6 +225,7 @@ def public_user(user: User | None, viewer: User | None = None) -> dict | None:
             "college": user.college,
             "photoUrl": user.photo_url,
             "online": user.online,
+            "isOwner": user.email.lower() == (os.environ.get("OWNER_EMAIL") or "coder@studyconnect.edu").strip().lower(),
         })
     return payload
 
