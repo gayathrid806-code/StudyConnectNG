@@ -14,6 +14,7 @@
           <a href="index.html" class="auth-logo"><span id="logoIcon"></span> StudyConnectNG</a>
           <h1>Welcome Back</h1>
           <p>Log in to continue learning with your peers</p>
+          <p id="existingAccountNote" class="form-hint" hidden>This email already has an account. Please log in. You do not need to sign up again.</p>
         </div>
 
         <form data-validate data-auth="login">
@@ -45,7 +46,7 @@
         </button>
 
         <div class="auth-footer">
-          Don't have an account? <a href="register.html">Create account</a>
+          Don't have an account? <a href="register.html?new=1">Create account</a>
         </div>
       </div>
     </div>
@@ -69,8 +70,24 @@
     document.getElementById('logoIcon').innerHTML = Icons.logo;
     document.getElementById('googleIcon').innerHTML = Icons.google;
     document.getElementById('googleLogin').addEventListener('click', () => {
-      StudyConnect.toast('Google login is not enabled. Use email login (try coder@studyconnect.edu / Student@123).');
+      const saved = localStorage.getItem('sc-has-account');
+      if (saved) {
+        document.getElementById('email').value = saved;
+        document.getElementById('existingAccountNote').hidden = false;
+        StudyConnect.toast('This Gmail already has an account. Log in with your password.');
+        return;
+      }
+      StudyConnect.toast('Use your Gmail address in the email box, then Log In. Google one-tap is not required.');
     });
+    const params = new URLSearchParams(location.search);
+    const email = params.get('email');
+    if (email) document.getElementById('email').value = email;
+    if (params.get('existing') === '1' || localStorage.getItem('sc-has-account')) {
+      document.getElementById('existingAccountNote').hidden = false;
+      if (!email && localStorage.getItem('sc-has-account')) {
+        document.getElementById('email').value = localStorage.getItem('sc-has-account');
+      }
+    }
   </script>
 </body>
 </html>

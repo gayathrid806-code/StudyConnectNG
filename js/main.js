@@ -15,6 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  const wantsNewAccount = new URLSearchParams(location.search).get('new') === '1';
+  if ((page === 'login.html' || page === 'register.html') && typeof API !== 'undefined' && API.token()) {
+    location.href = 'dashboard.html';
+    return;
+  }
+  if (page === 'register.html' && !wantsNewAccount && localStorage.getItem('sc-has-account')) {
+    const saved = encodeURIComponent(localStorage.getItem('sc-has-account') || '');
+    location.href = 'login.html?existing=1&email=' + saved;
+    return;
+  }
+
   const user = typeof API !== 'undefined' ? API.currentUser() : null;
 
   const sidebarMount = document.getElementById('sidebarMount');
@@ -149,10 +160,21 @@ document.addEventListener('DOMContentLoaded', () => {
           const path = authMode === 'register' ? '/api/auth/register' : '/api/auth/login';
           const data = await API.request(path, { method: 'POST', body: JSON.stringify(payload) });
           API.setSession(data.token, data.user);
+          if (payload.email) localStorage.setItem('sc-has-account', payload.email.trim().toLowerCase());
           StudyConnect.toast(authMode === 'register' ? 'Account created' : 'Welcome back');
           const next = authMode === 'register' || !data.user.setupComplete ? 'profile-setup.html' : 'dashboard.html';
           setTimeout(() => { location.href = next; }, 700);
         } catch (err) {
+          const already = /already/i.test(err.message || '');
+          if (authMode === 'register' && already) {
+            const email = (payload.email || '').trim().toLowerCase();
+            if (email) localStorage.setItem('sc-has-account', email);
+            StudyConnect.toast('This Gmail/email already has an account. Log in instead.');
+            setTimeout(() => {
+              location.href = 'login.html?existing=1&email=' + encodeURIComponent(email);
+            }, 800);
+            return;
+          }
           StudyConnect.toast(err.message);
         }
         return;

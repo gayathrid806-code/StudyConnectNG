@@ -40,6 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   initSubjectsIndex();
+
+  if (localStorage.getItem('sc-has-account')) {
+    document.querySelectorAll('a[href="register.html"]').forEach((a) => {
+      a.setAttribute('href', 'login.html?existing=1');
+      if (/get started|sign up/i.test(a.textContent)) a.textContent = 'Log In';
+    });
+  }
 });
 
 function initSubjectsIndex() {

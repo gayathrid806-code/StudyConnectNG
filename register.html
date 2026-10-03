@@ -84,7 +84,12 @@
     document.getElementById('logoIcon').innerHTML = Icons.logo;
     document.getElementById('googleIcon').innerHTML = Icons.google;
     document.getElementById('googleRegister').addEventListener('click', () => {
-      StudyConnect.toast('Google signup is not enabled. Create an account with email.');
+      const saved = localStorage.getItem('sc-has-account');
+      if (saved) {
+        location.href = 'login.html?existing=1&email=' + encodeURIComponent(saved);
+        return;
+      }
+      StudyConnect.toast('Type your Gmail in Email Address and create the account once. Next time you will only log in.');
     });
   </script>
 </body>
